@@ -1,0 +1,92 @@
+{% set version = '?v=1' %}
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if description %}
+        <meta name="description" content="{{ description }}">
+    {% endif %}
+
+    {% if imgpreview %}
+        <meta property="og:image" content="{{ request.url_root }}{{ imgpreview }}">
+    {% endif %}
+
+    <meta name="author" content="">
+    <link rel="canonical" href="{{ request.url }}">
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/style.css{{ version }}" rel="stylesheet">
+
+    {% block styles %}{% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner"><div class="container">
+            <a id="sitename" class="brand" href="/" title="Site description">Site title</a>
+            <div id="sharemenu" class="nav pull-right">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="icon-share"></i></a>
+                    <ul class="share dropdown-menu">
+                        <li><a class="btn" href="https://twitter.com/share?url={{ request.url|urlencode }}&text={{ title|urlencode }}"><i class="icon-twitter"></i> Tweet this</a></li>
+                        <li><a class="btn" href="http://www.facebook.com/sharer.php?u={{ request.url|urlencode }}&t={{ title|urlencode }}"><i class="icon-facebook"></i> Facebook</a></li>
+                        <li><a class="btn" href="https://plus.google.com/share?url={{ request.url|urlencode }}"><i class="icon-google-plus"></i> Google+</a></li>
+                        <li><a class="btn" href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.url|urlencode }}&title={{ title|urlencode }}"><i class="icon-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div></div>
+    </div>
+
+    <div id="alerts" class="container">
+        <div id="domain-alert" class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            This is an alert
+        </div>
+    </div>
+
+    <div id="content" class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div id="footer" class="container">
+        <div class="row"><div class="span12">
+            <hr>
+            <footer>
+                <p>Learn more <a href="/about/">about site</a>.</p>
+            </footer>
+        </div></div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js{{ version }}"></script>
+
+    {% block scripts %}{% endblock %}
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-XXX-XX']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+
+</body>
+</html>

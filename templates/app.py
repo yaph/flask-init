@@ -11,7 +11,12 @@ def page_not_found(error):
 
 @app.route('/')
 def start():
-    return render_template('start.html')
+    return render_template('start.html', title='My awesome flask app')
+
+
+@app.route('/about/')
+def about():
+    return render_template('about.html', title='About my awesome flask app')
 
 
 if __name__ == '__main__':

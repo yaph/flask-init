@@ -71,7 +71,7 @@ sed_esc $PROD_PYTHONPATH
 R7='s/#PROD_PYTHONPATH#/'$TMP_DIR'/g'
 
 sed_esc $DEV_VENV
-R8='s/#DEV_VENV#/'$DEV_VENV'/g'
+R8='s/#DEV_VENV#/'$TMP_DIR'/g'
 
 find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $R6 -e $R7 -e $R8
 
@@ -89,4 +89,3 @@ echo "Creating virtualenv for project and installing Python packages."
 source `which virtualenvwrapper.sh`
 mkvirtualenv $PROJECT_NAME
 pip install -r requirements.txt
-pip freeze > requirements.txt

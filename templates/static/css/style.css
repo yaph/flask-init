@@ -1,0 +1,32 @@
+body {
+    position: relative;
+    padding-top: 60px;
+}
+
+cite {
+    font-style:italic;
+}
+
+.spacer5 {clear:both;height:5px;}
+.centered {text-align:center;}
+.clearfix {clear:both;}
+
+/* navbar */
+#navbar .btn-group {
+    margin-left:4px;
+}
+#navbar .btn {
+    padding: 4px 12px;
+    font-size:18px;
+}
+
+#navbar .share .btn {
+    margin:.3em .5em .3em;
+    font-size:1.2em;
+}
+.caret {
+    opacity:.8;
+}
+.small {
+    font-size:.85em;
+}
