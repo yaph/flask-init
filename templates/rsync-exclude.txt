@@ -1,0 +1,12 @@
+rsync-exclude.txt
+*.sh
+*.rst
+*.pyc
+*.xml
+*.nja
+.git*
+data
+dumps
+static
+public_html
+fabfile.py

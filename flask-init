@@ -1,0 +1,92 @@
+#!/bin/bash
+
+TMP_DIR='/tmp'
+
+# functions
+function sed_esc {
+    TMP_DIR=${1//\//\\\/} # escape slashes
+}
+
+function add_static_resource {
+    curl $1 -o archive.zip
+    unzip -d static/vendor/ archive.zip
+    rm archive.zip
+}
+
+# user settings
+read -e -p "Name of the project: " -i "project" PROJECT_NAME
+PROJECT_DIR="`pwd`/${PROJECT_NAME}"
+DEV_VENV=$WORKON_HOME/$PROJECT_NAME
+
+echo
+echo "Settings for the Production environment."
+read -e -p "Production server host name: " -i "example.com" PROD_SERVER
+read -e -p "Production web user name: " -i "webuser" PROD_USER
+read -e -p "Production virtualenv dir: " -i "/home/$PROD_USER/.virtualenvs" PROD_VENV
+read -e -p "Production flask project dir: " -i "/home/$PROD_USER/flaskprojects/$PROJECT_NAME" PROD_PROJECT_FLASK
+read -e -p "Production public www dir: " -i "/home/$PROD_USER/www/$PROJECT_NAME" PROD_PROJECT_WWW
+
+PROD_PYTHONPATH=$PROD_VENV/$PROJECT_NAME/bin/python
+
+
+# determine script source dir http://stackoverflow.com/a/246128/291931
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  SRC_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+SRC_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+# create project dir and copy template files
+mkdir -p $PROJECT_DIR
+cd $PROJECT_DIR
+cp -R $SRC_DIR/templates/* .
+
+
+# file name changes
+mv ninja-config.txt $PROJECT_NAME.nja
+
+
+# sed replacements
+R1='s/#PROJECT_NAME#/'$PROJECT_NAME'/g'
+
+sed_esc $PROJECT_DIR
+R2='s/#PROJECT_DIR#/'$TMP_DIR'/g'
+
+sed_esc $HOME
+R3='s/#HOME#/'$TMP_DIR'/g'
+
+sed_esc $PROD_SERVER
+R4='s/#PROD_SERVER#/'$TMP_DIR'/g'
+
+sed_esc $PROD_PROJECT_FLASK
+R5='s/#PROD_PROJECT_FLASK#/'$TMP_DIR'/g'
+
+sed_esc $PROD_PROJECT_WWW
+R6='s/#PROD_PROJECT_WWW#/'$TMP_DIR'/g'
+
+sed_esc $PROD_PYTHONPATH
+R7='s/#PROD_PYTHONPATH#/'$TMP_DIR'/g'
+
+sed_esc $DEV_VENV
+R8='s/#DEV_VENV#/'$DEV_VENV'/g'
+
+find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $R6 -e $R7 -e $R8
+
+
+# add bootstrap and font-awesome etc.
+echo
+echo "Downloading and installing static libraries."
+add_static_resource 'http://twitter.github.io/bootstrap/assets/bootstrap.zip'
+add_static_resource 'http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip'
+
+
+# create virtualenv and install Flask
+echo
+echo "Creating virtualenv for project and installing Python packages."
+source `which virtualenvwrapper.sh`
+mkvirtualenv $PROJECT_NAME
+pip install -r requirements.txt
+pip freeze > requirements.txt
