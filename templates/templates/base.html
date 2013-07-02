@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% if description %}
-        <meta name="description" content="{{ description }}">
+        <meta name="description" content="{% block description %}{{ description }}{% endblock %}">
     {% endif %}
 
     {% if imgpreview %}
@@ -35,7 +35,7 @@
 <body>
 
     <div class="navbar navbar-fixed-top navbar-inverse">
-        <div class="navbar-inner"><div class="container">
+        <div id="navbar" class="navbar-inner"><div class="container">
             <a id="sitename" class="brand" href="/" title="Site description">Site title</a>
             <div id="sharemenu" class="nav pull-right">
                 <div class="btn-group">

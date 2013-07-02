@@ -30,3 +30,23 @@ cite {
 .small {
     font-size:.85em;
 }
+
+#startform {
+text-align:center;
+}
+
+#startform h1 {
+font-size:3em;
+margin-bottom: 1em;
+}
+
+#startform input {
+font-size:1.6em;
+width: 60%;
+height:1.4em;
+}
+
+#startform button {
+font-size:1.6em;
+height:1.5em;
+}
