@@ -42,7 +42,7 @@ SRC_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 # create project dir and copy template files
 mkdir -p $PROJECT_DIR
 cd $PROJECT_DIR
-cp -R $SRC_DIR/templates/* .
+cp -R $SRC_DIR/templates/. .
 
 
 # file name changes
