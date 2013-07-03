@@ -22,7 +22,7 @@ def dev():
 
 
 def live():
-    env.hosts = ['#SERVER_NAME#']
+    env.hosts = ['#PROD_SERVER#']
     env.cwd = LIVE_FLASK_PATH
 
 
