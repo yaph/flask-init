@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from fabric.api import env, local, cd, run
 
-LOCAL_FLASK_PATH = '#PROJECT_DIR#'
+LOCAL_FLASK_PATH = '.'
 LOCAL_PUBLIC_PATH = 'public_html/'
 LOCAL_STATIC_PATH = 'static/'
 LIVE_FLASK_PATH = '#PROD_PROJECT_FLASK#'
