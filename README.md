@@ -1,5 +1,3 @@
-Initialize a flask app for FastCGI deployment with bash, git, bootstrap, virtualenvwrapper etc.
-
 # flask-init
 
 A Bash script to create a Flask app skeleton for FastCGI depyloment.

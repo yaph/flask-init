@@ -1,2 +1,5 @@
 Flask
+cssmin
+jsmin
+webassets
 flup

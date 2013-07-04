@@ -1,3 +1,6 @@
 *.pyc
 *.nja
-tmp/
+instance/
+cache/
+static/.webassets-cache/
+static/gen/

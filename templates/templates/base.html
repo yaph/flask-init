@@ -16,10 +16,14 @@
 
     <meta name="author" content="">
     <link rel="canonical" href="{{ request.url }}">
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    {% if config.DEBUG %}
+        <link href="/static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/vendor/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet">
+    {% else %}
+        <link href="/static/gen/all.css{{ version }}" rel="stylesheet">
+    {% endif %}
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/css/style.css{{ version }}" rel="stylesheet">
 
     {% block styles %}{% endblock %}
 
@@ -72,8 +76,13 @@
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/static/js/script.js{{ version }}"></script>
+
+    {% if config.DEBUG %}
+        <script src="/static/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="/static/js/script.js"></script>
+    {% else %}
+        <script type="text/javascript" src="/static/gen/all.js{{ version }}"></script>
+    {% endif %}
 
     {% block scripts %}{% endblock %}
 

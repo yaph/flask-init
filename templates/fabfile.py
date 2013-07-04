@@ -36,6 +36,8 @@ def pip():
 
 
 def up():
+    local('scripts/assets.py')
+    local('rmdir static/.webassets-cache')
     rsync(LOCAL_FLASK_PATH, LIVE_FLASK_PATH, RSYNC_EXCLUDE)
     rsync(LOCAL_PUBLIC_PATH, LIVE_PUBLIC_PATH)
     rsync(LOCAL_STATIC_PATH, LIVE_STATIC_PATH)
