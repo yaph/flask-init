@@ -49,6 +49,10 @@ cp -R $SRC_DIR/templates/. .
 mv ninja-config.txt $PROJECT_NAME.nja
 
 
+# SECRET_KEY
+SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-40}`
+
+
 # sed replacements
 R1='s/#PROJECT_NAME#/'$PROJECT_NAME'/g'
 
@@ -73,7 +77,9 @@ R7='s/#PROD_PYTHONPATH#/'$TMP_DIR'/g'
 sed_esc $DEV_VENV
 R8='s/#DEV_VENV#/'$TMP_DIR'/g'
 
-find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $R6 -e $R7 -e $R8
+R9='s/#SECRET_KEY#/'$SECRET_KEY'/g'
+
+find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $R6 -e $R7 -e $R8 -e $R9
 
 
 # add bootstrap and font-awesome etc.
