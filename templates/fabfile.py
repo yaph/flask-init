@@ -11,6 +11,12 @@ RSYNC_EXCLUDE = '--exclude-from="rsync-exclude.txt"'
 env.use_ssh_config = True
 
 
+def assets():
+    local('rm -rf static/gen/')
+    local('scripts/assets.py')
+    local('rm -rf static/.webassets-cache/')
+
+
 def git():
     local('git add . && git commit -a')
     local('git push')
@@ -36,8 +42,7 @@ def pip():
 
 
 def up():
-    local('scripts/assets.py')
-    local('rmdir static/.webassets-cache')
+    assets()
     rsync(LOCAL_FLASK_PATH, LIVE_FLASK_PATH, RSYNC_EXCLUDE)
     rsync(LOCAL_PUBLIC_PATH, LIVE_PUBLIC_PATH)
     rsync(LOCAL_STATIC_PATH, LIVE_STATIC_PATH)

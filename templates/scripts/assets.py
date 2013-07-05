@@ -10,9 +10,9 @@ dir_static = os.path.join(
 static_env = Environment(dir_static)
 
 static_env.register('js_all', Bundle(
-    'vendor/bootstrap/js/bootstrap.js',
+    'vendor/bootstrap/js/bootstrap.min.js',
     'js/script.js',
-    filters='jsmin', output='gen/all.js'))
+    output='gen/all.js'))
 static_env['js_all'].build()
 
 # font-awesome is broken when included
