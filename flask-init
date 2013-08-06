@@ -85,7 +85,8 @@ find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $
 # add bootstrap and font-awesome etc.
 echo
 echo "Downloading and installing static libraries."
-add_static_resource 'http://twitter.github.io/bootstrap/assets/bootstrap.zip'
+add_static_resource 'http://getbootstrap.com/bs-v3.0.0-rc1-dist.zip'
+mv static/vendor/dist static/vendor/bootstrap
 add_static_resource 'http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip'
 
 

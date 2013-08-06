@@ -18,7 +18,6 @@ static_env['js_all'].build()
 # font-awesome is broken when included
 static_env.register('css_all', Bundle(
     'vendor/bootstrap/css/bootstrap.css',
-    'vendor/bootstrap/css/bootstrap-responsive.css',
     'css/style.css',
     filters='cssmin', output='gen/all.css'))
 static_env['css_all'].build()
