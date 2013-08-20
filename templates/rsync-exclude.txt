@@ -5,6 +5,7 @@ rsync-exclude.txt
 *.xml
 *.nja
 .git*
+build
 data
 dumps
 scripts
