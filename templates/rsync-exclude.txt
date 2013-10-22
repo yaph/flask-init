@@ -9,6 +9,5 @@ build
 data
 dumps
 scripts
-static
 public_html
 fabfile.py

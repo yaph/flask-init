@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_from_directory
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile('app.cfg')
@@ -18,6 +18,11 @@ def start():
 @app.route('/about/')
 def about():
     return render_template('about.html', title='About my awesome flask app')
+
+
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 
 if __name__ == '__main__':
