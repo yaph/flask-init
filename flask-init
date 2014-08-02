@@ -82,17 +82,14 @@ R9='s/#SECRET_KEY#/'$SECRET_KEY'/g'
 find . -type f -print0 | xargs -0 sed -i -e $R1 -e $R2 -e $R3 -e $R4 -e $R5 -e $R6 -e $R7 -e $R8 -e $R9
 
 
-# add bootstrap and font-awesome etc.
-echo
-echo "Downloading and installing static libraries."
-add_static_resource 'https://github.com/twbs/bootstrap/releases/download/v3.0.0/bootstrap-3.0.0-dist.zip'
-mv static/vendor/dist static/vendor/bootstrap
-add_static_resource 'http://fortawesome.github.io/Font-Awesome/assets/font-awesome.zip'
-
+# add static resources here
+#echo
+#echo "Downloading and installing static libraries."
+#add_static_resource 'https://example.com/lib.zip'
 
 # create virtualenv and install Flask
 echo
 echo "Creating virtualenv for project and installing Python packages."
 source `which virtualenvwrapper.sh`
 mkvirtualenv $PROJECT_NAME
-pip install -r requirements.txt
+workon $PROJECT_NAME && pip install -r requirements.txt
