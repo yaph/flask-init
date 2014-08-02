@@ -2,8 +2,9 @@
 import sys
 sys.path.insert(0, '#PROD_PROJECT_FLASK#')
 
-from flup.server.fcgi import WSGIServer
+from flipflop import WSGIServer
 from app import app
+
 
 class ScriptNameStripper(object):
     to_strip = '/app.fcgi'
