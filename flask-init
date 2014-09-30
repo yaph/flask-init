@@ -43,6 +43,7 @@ SRC_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 mkdir -p $PROJECT_DIR
 cd $PROJECT_DIR
 cp -R $SRC_DIR/templates/. .
+mv gitignore .gitignore
 
 
 # file name changes
